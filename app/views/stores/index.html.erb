@@ -1,0 +1,5 @@
+<% @stores.each do |s| %>
+    <h2><%= link_to s.store_number, store_path(s) %> <%= s.name %></h2>
+    <p>Phone: <%= s.phone %>
+    Email: <%= s.store_email %></p>
+<% end %>

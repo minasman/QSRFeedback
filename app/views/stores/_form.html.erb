@@ -1,0 +1,19 @@
+<%= form_for @store do |s| %>
+    <%= s.label :name %>
+        <%= s.text_field :name %><br>
+    <%= s.label :store_number %>
+        <%= s.text_field :store_number %><br>
+    <%= s.label :store_email %>
+        <%= s.text_field :store_email %><br>
+    <%= s.label :street_address %>
+        <%= s.text_field :street_address %><br>
+    <%= s.label :city %>
+        <%= s.text_field :city %><br>
+    <%= s.label :state %>
+        <%= s.text_field :state %><br>
+    <%= s.label :zip_code %>
+        <%= s.text_field :zip_code %><br>
+    <%= s.label :phone %>
+        <%= s.text_field :phone %><br>
+    <%= s.submit%>
+<% end %>
