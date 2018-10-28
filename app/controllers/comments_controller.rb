@@ -11,7 +11,10 @@ class CommentsController < ApplicationController
     end
 
     def show
-
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @comment }
+        end
     end
 
     def open

@@ -9,3 +9,40 @@ Email: <%= @store.store_email %>
  <div id="openComments">
  </div>
 
+<script>
+$(function showComments(){
+        $("#showComment").on("click", function() {
+            $.get("/comments.json", function(data) {
+                var myList = ""
+                data.map(function(d){
+                    let commentDate = new Date(Date.parse(d.visit_date)).toLocaleDateString()
+                    let commentTime = new Date(Date.parse(d.visit_time)).toLocaleTimeString()
+                    myList += "<p> Comment: "+ d.case_number + " Date: " + commentDate + " Time: " + commentTime + "</p>"
+                    debugger
+                    if (d.comment_updates.length > 0 ){
+                        myList += "<a href='#' class='update-link' data-id='"+ d.id + "'>Updates</a><div id='update-"+d.id+"'></div>"
+                    }
+                });
+                $("#openComments").html(myList);
+                getUpdate()
+            });
+        });
+    });
+
+function getUpdate(){
+    $('.update-link').on('click', function(){
+       event.preventDefault();
+       commentNumber = parseInt(this.attributes["data-id"].value)
+        $.get("/comments/" +  commentNumber + ".json", function(data) {
+            var commentUpdates = data['comment_updates']
+            let thisUpdate = ""
+            commentUpdates.forEach(function(update){
+                let updateDate = new Date(Date.parse(update.update_date)).toLocaleDateString()
+                thisUpdate += "<p>" + updateDate + " Updated By: " + update.employee_name + " Update: " + update.current_update + "</p>"
+            })
+            $("#update-" + commentNumber).html(thisUpdate);
+    })
+})
+}
+
+</script>
