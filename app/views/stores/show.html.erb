@@ -1,8 +1,11 @@
-    <p> <%= @store.name %> </p><br>
-    <p> <%= @store.store_number %></p><br>
-    <p> <%= @store.store_email %></p><br>
-    <p> <%= @store.street_address %></p><br>
-    <p> <%= @store.city %></p><br>
-    <p> <%= @store.state %></p><br>
-    <p> <%= @store.zip_code %></p><br>
-    <p> <%= @store.phone %></p><br>
+<h2><%= @store.store_number %> <%= @store.name %></h2>
+<p>General Manager: <%=User.find_by(id: @store[:gm_id]).first_name %><br> Phone: <%= @store.phone %>
+Email: <%= @store.store_email %>
+<br>Open Comments: <%= @store.comments.open.count %>
+ Closed Comments: <%= @store.comments.closed.count %> </p>
+<br>
+<button id="showComment">Show Open Comments</button>
+
+ <div id="openComments">
+ </div>
+

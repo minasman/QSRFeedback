@@ -3,6 +3,10 @@ class CommentUpdatesController < ApplicationController
     before_action :require_log_in
 
     def index
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @comment }
+        end
     end
 
     def new

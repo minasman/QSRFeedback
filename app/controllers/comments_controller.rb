@@ -4,9 +4,14 @@ class CommentsController < ApplicationController
 
     def index
         @comments = Comment.open.order("store_id")
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @comments }
+        end
     end
 
     def show
+
     end
 
     def open

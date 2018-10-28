@@ -32,6 +32,10 @@ class UsersController < ApplicationController
     def destroy
     end
 
+    def position
+        @users = User.gms
+    end
+
     private
     def set_user
         @user = User.find(params[:id])

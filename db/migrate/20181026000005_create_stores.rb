@@ -9,6 +9,11 @@ class CreateStores < ActiveRecord::Migration[5.2]
       t.string :state
       t.string :zip_code
       t.string :phone
+      t.integer :owner_id
+      t.integer :director_id
+      t.integer :om_id
+      t.integer :supervisor_id
+      t.integer :gm_id
       t.timestamps
     end
   end

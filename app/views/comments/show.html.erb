@@ -1,12 +1,35 @@
+
+
 <% if flash.alert %>
     <div class="alert alert-danger"><%= flash.alert %></div>
 <% end %>
 <% if flash.notice %>
     <div class="alert alert-success"><%= flash.notice %></div>
 <% end %>
-<h1>Case Number :<%= @comment.case_number %></h1>
+
+<h1 class="myComment" data-id="<%= @comment.id %>">Case Number :<%= @comment.case_number %></h1>
 <p><%= link_to @comment.store.store_number, store_path(@comment.store) %> Incident Date: <%= @comment.visit_date.strftime("%m/%d/%Y") %> Time: <%= @comment.visit_time.strftime("%I:%M %p") %> Status: <%= @comment.status %> <br>
     Guest: <%= @comment.guest.first_name + " " + @comment.guest.last_name %> Main Issue: <%= @comment.first_issue %> # Updates <%= @comment.comment_updates.count %> <p>
 <% if !@comment.comment_updates.empty? %>
-    <button class="button button-light" ><%= link_to 'See Updates', comment_comment_updates_path(@comment) %></button>
+    <button class="button button-light comment-updates" >See Updates</button>
 <% end %>
+
+<div id="updates">
+</div>
+
+<script>
+$(function(){
+    var commentId = parseInt($(".myComment").attr("data-id"));
+    $(".comment-updates").on("click", function() {
+        $.get("/comments/" + commentId + "/comment_updates.json", function(data) {
+            var myUpdates = ""
+            const theUpdates = data['comment_updates']
+            theUpdates.map(function(d){
+                let commentDate = new Date(Date.parse(d.update_date)).toLocaleDateString()
+                myUpdates += "<p>Date: " + commentDate + " Contacted By: " + d.employee_name + " Update: " + d.current_update + "</p>"
+            });
+            $("#updates").html(myUpdates);
+        });
+    });
+});
+</script>
