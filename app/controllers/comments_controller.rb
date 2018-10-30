@@ -10,6 +10,15 @@ class CommentsController < ApplicationController
         end
     end
 
+    def store_comments
+        @comments = Comment.find_by(store_id: params[:store])
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @comments }
+        end
+        binding.pry
+    end
+
     def show
         respond_to do |format|
             format.html { render :show }

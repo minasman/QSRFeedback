@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get '/open' => 'comments#open'
   get '/closed' => 'comments#closed'
   get '/position' => 'users#position'
+  get '/store_comments' => 'comments#store_comments'
 end

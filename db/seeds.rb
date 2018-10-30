@@ -94,3 +94,14 @@ users_list.each do |name, user_hash|
   p = User.create(user_hash)
   p.save
 end
+
+visitDate = Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today)
+visitTime = Faker::Time.between(DateTime.now - 1, DateTime.now)
+caseNumber = Faker::Number.number(10)
+firstIssue = Faker::Lorem.characters(10)
+firstIssueComment = Faker::Lorem.characters(30)
+
+1000.times do
+  Guest.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email)
+  Comment.create(visit_date: Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today), visit_time: Faker::Time.between(DateTime.now - 1, DateTime.now), comment_type: ["Complaint", "Compliment", "Inquiry"].sample, source: ["1-800#", "VOICE", "Local"].sample, urgent: ["General", "Urgent"].sample, case_number: Faker::Number.number(10), first_issue: Faker::Lorem.characters(10), first_issue_comment: Faker::Lorem.characters(30), contact_type: ["Phone", "Email", "Mail", "Voice", "Other"].sample, visit_type: ["DT", "FC", "Mobile", "Kiosk", "Delivery", "Other"].sample, status: ["Open", "Closed"].sample, store_id: Faker::Number.between(0, 34), guest_id: Faker::Number.between(0, 99))
+end
