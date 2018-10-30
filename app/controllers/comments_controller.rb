@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     before_action :require_log_in
 
     def index
-        @comments = Comment.open.order("store_id")
+        @comments = Comment.open.order(store_id: :asc, visit_date: :asc)
         respond_to do |format|
             format.html { render :show }
             format.json { render json: @comments }
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     end
 
     def open
-        @comments = Comment.open.order("store_id")
+        @comments = Comment.open.order(store_id: :asc, visit_date: :asc)
     end
 
     def closed

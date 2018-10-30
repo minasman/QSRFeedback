@@ -13,10 +13,37 @@
 <% if !@comment.comment_updates.empty? %>
     <button class="button button-light comment-updates" >See Updates</button>
 <% end %>
+    <button class="button button-light add-updates" >Add Update</button>
+
+<div id="addUpdate">
+</div>
 
 <div id="updates">
 </div>
 
-<script>
 
+
+<script>
+    $(function(){
+        $('.add-updates').on('click', function(){
+            $('#updates').html("")
+            let updateHtml ="<form onsubmit='postUpdate();return false;'><label>Date Updated</label><input id='theDate' type='date'><label>Contact Type</label><input id='theType' type='text'><label>Who Contacted</label><input id='theName' type='text'><br><label>Update</label><input id='theUpdate' type='text'><label>Close Comment?</label><input name='status' type='radio' value='Closed'><br><input type='submit'></form>"
+            $('#addUpdate').html(updateHtml)
+        })
+    })
+
+function postUpdate() {
+    let theDate = document.getElementById('theDate').value;
+    let theName = document.getElementById('theName').value;
+    let theType = document.getElementById('theType').value;
+    let theUpdate = document.getElementById('theUpdate').value;
+    let theComment = parseInt($('.myComment').attr('data-id'))
+    let newUpdate = JSON.stringify({update_date: theDate, update_type: theType, current_update: theUpdate, employee_name: theName, comment_id: theComment})
+    let updatesDiv = document.getElementById('updates');
+    let templateHTML ="<p>Date: " + theDate + " Contacted By: " + theName + " By: " + theType + "</p><p>" + theUpdate + "</p>"
+    updatesDiv.innerHTML += templateHTML;
+    $('#addUpdate').html("")
+    }
 </script>
+
+

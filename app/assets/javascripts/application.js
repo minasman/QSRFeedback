@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lodash
 //= require stores/store
 //= require comments/comment
 

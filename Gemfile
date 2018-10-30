@@ -30,6 +30,7 @@ gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'jquery-rails'
 gem 'pry'
 gem 'active_model_serializers'
+gem 'lodash-rails', '~> 3.10', '>= 3.10.1'
 
 
 
