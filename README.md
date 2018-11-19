@@ -1,24 +1,29 @@
-# README
+QSRFeedback
+The QSRFeedback application assists QSRs monitor and track feedback from guests in order to ensure timely follow-up and action
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Installation
 
-Things you may want to cover:
+clone this repo into your file:
 
-* Ruby version
+https://github.com/minasman/QSRFeedback.git
 
-* System dependencies
+And then execute:
 
-* Configuration
+$ bundle
 
-* Database creation
+Info
+The program uses Ruby version 2.5.1 and postgress database
 
-* Database initialization
+Development
+After checking out the repo, run bin/setup to install dependencies. Then, run rake spec to run the tests. You can also run bin/console for an interactive prompt that will allow you to experiment.
 
-* How to run the test suite
+To install this gem onto your local machine, run bundle exec rake install. To release a new version, update the version number in version.rb, and then run bundle exec rake release, which will create a git tag for the version, push git commits and tags, and push the .gem file to rubygems.org.
 
-* Services (job queues, cache servers, search engines, etc.)
+Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com//qsrfeedback. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
-* Deployment instructions
+License
+The gem is available as open source under the terms of the MIT License.
 
-* ...
+Code of Conduct
+Everyone interacting in the FastFoodNutrition project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com//qsrfeedback/blob/master/CODE_OF_CONDUCT.md).

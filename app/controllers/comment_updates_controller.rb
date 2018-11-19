@@ -20,7 +20,10 @@ class CommentUpdatesController < ApplicationController
             @comment.status = "Closed"
             @comment.save
         end
-        redirect_to comment_path(@comment)
+        respond_to do |format|
+            format.json {render json: @comment_update, status: 201}
+            format.html {redirect_to comment_path(@comment)}
+        end
     end
 
     private

@@ -1,7 +1,9 @@
 <h2 id="storeId" data-id="<%= @store.id %>"><%= @store.store_number %> <%= @store.name %></h2>
 
+<%# the next button here allows you to go to the next store and view info without refreshing. This satisfies the second requirement. this is on the stores/store.js page %>
 <button id="showComment">Show Open Comments</button><button id="nextStore">Next Store</button>
 
+<%# Section below will populate open comments via javascript satisfying 1st requirement. this calls on the stores/store.js showComments function %>
  <div id="openComments">
  </div>
 

@@ -15,35 +15,49 @@
 <% end %>
     <button class="button button-light add-updates" >Add Update</button>
 
+<%# form will display on click of 'add update' form will add update to current comment and disply to page. satifies requirement 4. %>
 <div id="addUpdate">
+    <div id="updateForm">
+            <%= form_with(model: [ @comment, @comment.comment_updates.build ], local: true) do |form| %>
+        <%= form.label :update_date, "Date Updated" %>
+            <%= form.date_field :update_date, required: "true" %>
+        <%= form.label :update_type, "Contact Type" %>
+            <%= form.select :update_type, Comment::CONTACT_TYPE, required: "true" %>
+        <%= form.label :employee_name, "Who Contacted" %>
+            <%= form.text_field :employee_name, required: "true" %><br>
+        <%= form.label :current_update, "Update" %><br>
+            <%= form.text_area :current_update, size: "50x5", required: "true" %><br>
+        <%= form.label :status, "Close Comment?" %>
+        <%= form.radio_button :status , "Closed"%><br>
+        <%= form.submit %><button type="reset">Reset</button>
+    <% end %>
+    </div>
 </div>
 
+<%# section will show the comment updates if they are there. satisfies requirement 3. uses comments/comment.js page  %>
 <div id="updates">
 </div>
-
-
 
 <script>
     $(function(){
         $('.add-updates').on('click', function(){
-            $('#updates').html("")
-            let updateHtml ="<form onsubmit='postUpdate();return false;'><label>Date Updated</label><input id='theDate' type='date'><label>Contact Type</label><input id='theType' type='text'><label>Who Contacted</label><input id='theName' type='text'><br><label>Update</label><input id='theUpdate' type='text'><label>Close Comment?</label><input name='status' type='radio' value='Closed'><br><input type='submit'></form>"
-            $('#addUpdate').html(updateHtml)
+            $('#updateForm').toggle()
         })
     })
 
-function postUpdate() {
-    let theDate = document.getElementById('theDate').value;
-    let theName = document.getElementById('theName').value;
-    let theType = document.getElementById('theType').value;
-    let theUpdate = document.getElementById('theUpdate').value;
-    let theComment = parseInt($('.myComment').attr('data-id'))
-    let newUpdate = JSON.stringify({update_date: theDate, update_type: theType, current_update: theUpdate, employee_name: theName, comment_id: theComment})
-    let updatesDiv = document.getElementById('updates');
-    let templateHTML ="<p>Date: " + theDate + " Contacted By: " + theName + " By: " + theType + "</p><p>" + theUpdate + "</p>"
-    updatesDiv.innerHTML += templateHTML;
-    $('#addUpdate').html("")
-    }
-</script>
+  $(function () {
+    $('form').submit(function(event) {
+        //prevent form from submitting the default way
+        event.preventDefault();
+        var values = $(this).serialize();
+        var comment_number = $('.myComment').attr('data-id')
+        var posting = $.post('/comments/' + comment_number + '/comment_updates', values);
+        $('#updateForm').hide()
 
-
+        posting.done(function(data) {
+            let theUpdate = new CommentUpdate(data.update_date,data.update_type, data.employee_name, data.current_update, data.status, data.comment.id)
+            theUpdate.displayComment()
+      });
+    });
+  });
+  </script>
